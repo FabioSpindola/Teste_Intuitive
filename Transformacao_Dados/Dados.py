@@ -18,6 +18,11 @@ def extract_table_from_pdf(pdf_path):
     
     return full_table
 
+def replace_abbreviations(df):
+    df.columns = df.columns.str.replace('OD', 'Odontologia', regex=False)
+    df.columns = df.columns.str.replace('AMB', 'Ambulatório', regex=False)
+    return df
+
 # Função para salvar a tabela em um arquivo ZIP
 def save_table_to_zip(df, zip_path, csv_filename):
     temp_csv_path = os.path.join(os.path.dirname(zip_path), csv_filename)
@@ -40,4 +45,6 @@ csv_filename = 'rol_procedimentos.csv'
 
 # Extrair a tabela e salvar em ZIP
 table_df = extract_table_from_pdf(pdf_path)
+table_df = replace_abbreviations(table_df)
 save_table_to_zip(table_df, zip_output_path, csv_filename)
+
