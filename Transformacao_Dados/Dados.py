@@ -7,7 +7,7 @@ def extract_table_from_pdf(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
         all_tables = []
                 
-        for page_num in range(2, len(pdf.pages)):  # páginas começam com índice 0
+        for page_num in range(2, len(pdf.pages)):  
             page = pdf.pages[page_num]
             tables = page.extract_tables()
             for table in tables:
